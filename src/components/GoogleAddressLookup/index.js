@@ -1,6 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import scriptLoader from 'react-async-script-loader';
 import PlacesLookupComponent from './component';
 import * as CustomPropTypes from './proptypes';
 
@@ -13,14 +12,8 @@ const googleMapApiUrl = 'https://maps.googleapis.com/maps/api/js';
 export default function GoogleAddressLookup(props) {
     const { apiKey, ...rest } = props;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const Component = useCallback(
-        scriptLoader(`${googleMapApiUrl}?key=${apiKey}&libraries=places`)(PlacesLookupComponent),
-        [apiKey],
-    );
-
     // eslint-disable-next-line react/jsx-props-no-spreading
-    return <Component {...rest} />;
+    return <PlacesLookupComponent {...rest} />;
 }
 
 GoogleAddressLookup.propTypes = {
